@@ -5,18 +5,9 @@ import { NativeRouter, Switch, Route } from 'react-router-native';
 
 import SignIn from "./SignIn";
 import Menu from "./Menu";
-import PlaySolo from "./SinglePlayer";
-/*
-import SignUp from "./SignUp";
-import Menu from "./Menu";
-import GameView from "./gameView";
-import PlayerVsAi from "./PlayerVsAi";
-import SubMenu from './subMenu';
-import MultiplayerMenu from './multiplayerMenu';
-import MultiplayerView from './multiplayerView';
-import ProgressBar from './progressBar';
-import JoinRoom from './joinRoom';
-*/
+import SinglePlayer from "./SubMenu";
+import SubMenu from "./SubMenu";
+import GameView from './GameView';
 
 function Application() {
   const user = useContext(UserContext);
@@ -26,7 +17,8 @@ function Application() {
         <View>
           <Switch>
             <Route exact path="/" component={Menu}/>
-            <Route exact path="/PlaySolo" component = {PlaySolo}/>
+            <Route exact path="/SubMenu" component={SubMenu}/>
+            <Route exact path="/GameView" component = {GameView}/>
           </Switch>
         </View>
       </NativeRouter>
