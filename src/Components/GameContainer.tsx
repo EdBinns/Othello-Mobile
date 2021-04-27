@@ -15,8 +15,9 @@ type Props = {
 export default function GameContainer({ gameState, onClickCell, turn, message, scores }: Props) {
     return (
         <View>
-            <GameInfo scores={scores} turn={turn} message={message} />
             <GameBoard gameState={gameState} isGameOver={false} onClickCell={onClickCell} />
+            <GameInfo scores={scores} turn={turn} message={message} />
+
         </View>
     );
 }

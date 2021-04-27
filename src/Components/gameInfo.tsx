@@ -13,7 +13,7 @@ type Props = {
 export default function GameInfo({ turn, message, scores }: Props) {
     return (
         <View>
-            <Text>hola</Text>
+            <Text>Este es el game info</Text>
         </View>
 
     );
