@@ -1,70 +1,76 @@
 import React, { useState } from "react";
-import { signInWithGoogle } from "../../firebase";
 import { auth } from "../../firebase";
-import { View, Text, TextInput, Button } from 'react-native';
-import {Link} from 'react-router-native';
-import * as Google from "expo-google-app-auth";
+import { View, Text, TextInput, Button, StatusBar } from 'react-native';
+import { Link } from 'react-router-native';
 
+/*
+import * as GoogleAuthentication from 'expo-google-app-auth';
+import firebase from 'firebase';
+
+*/
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
 
-    //Esta funcion es para comprobar la existencia de una cuenta en la BD de firebase.
-    const signInWithEmailAndPasswordHandler = (event, email, password) => {
-        event.preventDefault();
-        auth.signInWithEmailAndPassword(email, password).catch(error => {
-            console.error("Error signing in with password and email", error);
-        });
-    };
-    const onChangeHandler = (event) => {
-        const { name, value } = event.currentTarget;
-        if (name === 'userEmail') {
-            setEmail(value);
-        }
-        else if (name === 'userPassword') {
-            setPassword(value);
-        }
-    };
+  //Esta funcion es para comprobar la existencia de una cuenta en la BD de firebase.
+  const signInWithEmailAndPasswordHandler = (email, password) => {
+    console.log("hola");
+    auth.signInWithEmailAndPassword(email, password).catch(error => {
+      console.log("Error signing in with password and email", error);
+    });
+    console.log("despues");
+  };
 
-    const signInAsync = async () => {
-        console.log("LoginScreen.js 6 | loggin in");
-        try {
-          const { type, user } = await Google.logInAsync({
-            iosClientId: `<YOUR_IOS_CLIENT_ID>`,
-            androidClientId: `<YOUR_ANDROID_CLIENT_ID>`,
-          });
-    
-          if (type === "success") {
-            // Then you can use the Google REST API
-            console.log("LoginScreen.js 17 | success, navigating to profile");
-            navigation.navigate("Profile", { user });
+
+  /*
+    const signInWithGoogle = () =>
+      GoogleAuthentication.logInAsync({
+        webClientId="349581276888-sit3tiuali8dnboomm6cqlcalem9h039.apps.googleusercontent.com",
+        offlineAccess: true
+      })
+        .then((logInResult) => {
+          if (logInResult.type === 'success') {
+            const { idToken, accessToken } = logInResult;
+            const credential = firebase.auth.GoogleAuthProvider.credential(
+              idToken,
+              accessToken
+            );
+  
+            return firebase.auth().signInWithCredential(credential);
+            // Successful sign in is handled by firebase.auth().onAuthStateChanged
           }
-        } catch (error) {
-          console.log("LoginScreen.js 19 | error with login", error);
-        }
-      };
+          return Promise.reject(); // Or handle user cancelation separatedly
+        })
+        .catch((error) => {
+          // ...
+        });
+  */
+  const prueba = () =>{
+    alert(email + password);
+  }
 
-    return (
-        <View>
-            <Text h1>BIENVENIDOS AL SISTEMA</Text>
-            <TextInput value={email} onChangeText={email => setEmail(email)} placeholder="Ingrese su correo"></TextInput>
-            <TextInput value={password} onChangeText={password => setPassword(password)} placeholder="Ingrese su contraseña" ></TextInput>
+  return (
+    <View>
+      <StatusBar/>
+      <Text h1>BIENVENIDOS AL SISTEMA</Text>
+      <TextInput value={email} onChangeText={email => setEmail(email)} placeholder="Ingrese su correo"></TextInput>
+      <TextInput value={password} onChangeText={password => setPassword(password)} placeholder="Ingrese su contraseña" ></TextInput>
 
-            <Button title="Iniciar Sesion" onPress={(event) => { signInWithEmailAndPasswordHandler(event, email, password) }}/>
+      <Button title="Iniciar Sesion" onPress={()=>{signInWithEmailAndPasswordHandler(email, password)}}/>
 
-            <Button title="Google" onPress={signInAsync}/>
+      <Button title="Google" onPress = {prueba}/>
 
-            <Link to="/" >
-                <Text>Registrarme</Text>
-            </Link>
+      <Link to="/" >
+        <Text>Registrarme</Text>
+      </Link>
 
-        </View>
-    );
-}
+    </View>
+  );
+  }
 
-export default SignIn;
+  export default SignIn;
 
 
 

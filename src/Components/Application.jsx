@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Router } from "@reach/router";
 import { UserContext } from "../Providers/UserProvider";
+import { View } from "react-native";
+import { NativeRouter, Switch, Route } from 'react-router-native';
+
 import SignIn from "./SignIn";
-import Hola from "./Hola"
-import { View , Text } from "react-native";
-import { NativeRouter, Switch, Route, Link } from 'react-router-native';
+import Menu from "./Menu";
+import PlaySolo from "./SinglePlayer";
 /*
 import SignUp from "./SignUp";
 import Menu from "./Menu";
@@ -19,13 +20,13 @@ import JoinRoom from './joinRoom';
 
 function Application() {
   const user = useContext(UserContext);
-
   return (
     user ?
       <NativeRouter>
         <View>
           <Switch>
-            <Route exact path="/" component={SignIn} />
+            <Route exact path="/" component={Menu}/>
+            <Route exact path="/PlaySolo" component = {PlaySolo}/>
           </Switch>
         </View>
       </NativeRouter>
