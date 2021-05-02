@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View} from 'react-native';
+import { View, StyleSheet, ScrollView} from 'react-native';
 import { startResponse, makeMove, gameStateBack } from '../Services/Services';
 import { Coordinate, ReversiBoard, ReversiCell, ScoresJson } from '../Models';
 import GameContainer from './GameContainer';
@@ -30,7 +30,7 @@ const GameView = () => {
         if (actualBoard !== gameStateBack.newBoard) {
             setMessage("Movimiento correcto.");
             setTurn(gameStateBack.status)
-            
+
             if (gameStateBack.status === playerturn) {
                 setMessage("El enemigo no tiene movimientos, el turno es tuyo!")
             } else if (gameStateBack.status === 2) {
@@ -46,9 +46,12 @@ const GameView = () => {
         setGameState(gameStateBack.newBoard)
     }
     return (
-        <View>
-            <GameContainer gameState={gameState} turn={turn} message={message} scores={scores} onClickCell={showCordenade} />
-        </View>
+        <ScrollView>
+            <View>
+                <GameContainer gameState={gameState} turn={turn} message={message} scores={scores} onClickCell={showCordenade} />
+            </View>
+        </ScrollView>
+
     );
 }
 

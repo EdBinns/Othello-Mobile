@@ -12,6 +12,7 @@ export let gameId: string;
 export let createdMatch: boolean;
 
 
+
 /*
 Esta funcion nos crea la matriz vacia
 */
@@ -25,7 +26,6 @@ function generateGameBoard(boardSize: number): ReversiBoard {
 }
 
 export async function startMatch(length: number) {
-  console.log("haciendose peticion");
   let board = generateGameBoard(length);
 
   await Axius.post(BaseURL + 'startGame',
@@ -111,8 +111,6 @@ export async function JoinRoomService(user:any, idRoom: string) {
 }
 
 export async function GetActualGameService(idRoom: string) {
-  console.log("se hace el servicio");
-  console.log(idRoom);
   await Axius.post(BaseURL + 'getActualGame',
     {
       id: idRoom

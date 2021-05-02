@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, Aler
 import { Link } from 'react-router-native';
 import { ListPicker } from 'react-native-ultimate-modal-picker';
 import { startResponse } from '../Services/Services';
+import { chooseLvl } from './GameViewAI';
 
 export default function subMenu() {
 
@@ -12,18 +13,14 @@ export default function subMenu() {
     { label: '3', value: 3 }
   ];
 
-  const prueba = () => {
-    console.log(startResponse.newBoard);
-  }
-
   return (
     <SafeAreaView>
       <StatusBar />
       <View>
         <Text style={styles.centerText}>Bienvenido al menu de Reversi</Text>
-        <ListPicker title="Selecciona el nivel" items={items} onChange={(item) => console.log(item)} />
+        <ListPicker title="Selecciona el nivel" items={items} onChange={(item) => chooseLvl(item)} />
         <View style={styles.margintopBotones}>
-          <Link to="/GameView" style={styles.LinkButton}>
+          <Link to="/GameViewAI" style={styles.LinkButton}>
             <Text style={styles.LinkText}>Jugar</Text>
           </Link>
         </View>
@@ -32,9 +29,6 @@ export default function subMenu() {
             <Text style={styles.LinkText}>Volver</Text>
           </Link>
         </View>
-
-        <Button title="prueba" onPress={() => prueba()}></Button>
-
       </View>
     </SafeAreaView>
 
@@ -50,6 +44,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   LinkButton: {
+    width: '60%',
     elevation: 8,
     backgroundColor: "#009688",
     borderRadius: 10,

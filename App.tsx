@@ -5,7 +5,7 @@ import Application from "./src/Components/Application";
 export default function App() {
   return (
       <UserProvider>
-        <Application />
+        <Application/>
       </UserProvider>
   );
 }

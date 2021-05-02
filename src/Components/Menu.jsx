@@ -21,13 +21,13 @@ export default function Menu() {
         </View>
 
         <View style={styles.margintopBotones}>
-          <Link to="/SinglePlayer" style={styles.LinkButton}>
+          <Link to="/GameView" style={styles.LinkButton}>
             <Text style={styles.LinkText}>Jugar vs Jugador</Text>
           </Link>
         </View>
 
         <View style={styles.margintopBotones}>
-          <Link to="/SinglePlayer" style={styles.LinkButton}>
+          <Link to="/MultiplayerMenu" style={styles.LinkButton}>
             <Text style={styles.LinkText}>Multijugador</Text>
           </Link>
         </View>
@@ -51,6 +51,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   LinkButton: {
+    width:'60%',
     elevation: 8,
     backgroundColor: "#009688",
     borderRadius: 10,

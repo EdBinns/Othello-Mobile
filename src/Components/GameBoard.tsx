@@ -15,33 +15,29 @@ export default function GameBoard({ isGameOver, gameState, onClickCell }: BoardP
     return (
         <View>
             <ScrollView>
-                <Link to="/" style={styles.LinkButton}>
-                    <Text style={styles.LinkText}>Volver al menu</Text>
-                </Link>
-
                 <View>
-                    <Table borderStyle={{ borderWidth: 1.5, borderColor: 'black' }}>
+                    <Table style={{margin:10}} borderStyle={{ borderWidth: 1.5, borderColor: 'black' }}>
                         {
                             gameState.map((rowData, i) => (
                                 <TableWrapper key={i} style={styles.row}>
                                     <Row data={rowData.map((cellData, j) => {
                                         if (cellData === 0) {
                                             return (
-                                                <TouchableOpacity onPress={() => onClickCell({ i, j }, gameState)}>
+                                                <TouchableOpacity onPress={()  => onClickCell({ i, j }, gameState)}>
                                                     <Cell key={j} data={cellData} textStyle={styles.text} style={styles.black} />
                                                 </TouchableOpacity>
-                                                );
+                                            );
                                         } else if (cellData === 1) {
                                             return (
                                                 <TouchableOpacity onPress={() => onClickCell({ i, j }, gameState)}>
                                                     <Cell key={j} data={cellData} textStyle={styles.text} style={styles.white} />
                                                 </TouchableOpacity>
-                                                );
+                                            );
                                         } else {
                                             return (
-                                            <TouchableOpacity onPress={() => onClickCell({ i, j }, gameState)}>
-                                                <Cell key={j} data={cellData} textStyle={styles.text} style={styles.empty} />
-                                            </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => onClickCell({ i, j }, gameState)}>
+                                                    <Cell key={j} data={cellData} textStyle={styles.text} style={styles.empty} />
+                                                </TouchableOpacity>
                                             );
                                         }
 
@@ -81,29 +77,26 @@ var styles = StyleSheet.create({
         margin: 6,
     },
     row: {
-        backgroundColor: 'green',
+        backgroundColor: '#22c878',
         width: "100%",
         height: 40,
     },
     empty: {
-        margin:10,
+        margin: 10,
     },
     white: {
-        width:30,
-        height:30,
+        width: '60%',
+        height: '60%',
         backgroundColor: 'white',
-        borderRadius:50,
-        margin:10
+        borderRadius: 50,
+        margin: 10
 
     },
     black: {
-        width:30,
-        height:30,
+        width: '60%',
+        height: '60%',
         backgroundColor: 'black',
-        borderRadius:50,
+        borderRadius: 50,
         margin:10
-
     },
-
-
 });
