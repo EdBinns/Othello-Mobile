@@ -52,8 +52,12 @@ export const generateUserDocument = async (user, additionalData) => {
 };
 
 const getUserDocument = async uid => {
-  if (!uid) return null;
+  if (!uid) {
+    console.log("entro al primer if")
+    return null;
+  }
   try {
+    console.log("entro al try")
     const userDocument = await firestore.doc(`users/${uid}`).get();
 
     return {

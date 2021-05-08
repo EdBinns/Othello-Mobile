@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ScrollView, View, Text, TextInput, StyleSheet } from "react-native";
+import { ScrollView, View, Text, TextInput, StyleSheet, Image } from "react-native";
 import { Link } from 'react-router-native';
 import { UserContext } from "../Providers/UserProvider";
 import { JoinRoomService } from "../Services/Services";
@@ -7,16 +7,19 @@ import { JoinRoomService } from "../Services/Services";
 export default function JoinRoom() {
     const user = useContext(UserContext);
 
-    const prueba = (text:any) => {
+    const prueba = (text: any) => {
         JoinRoomService(user, text);
     }
 
     return (
         <ScrollView>
             <View>
-                <Text style={{ textAlign: 'center' }}>Unirse A Sala</Text>
+                <Text style={styles.centerText}>Unirse A Sala</Text>
 
-                <TextInput style={{ borderColor: 'black', borderWidth: 1 }} onChangeText={(text) => prueba(text)} />
+                <View style = {{display:'flex', justifyContent:'center', alignItems:'center', marginTop:30, marginBottom:30}}>
+                <TextInput style={{borderColor: 'black', borderWidth: 1, width:'70%', textAlign:'center' }} placeholder="Introduzca el codigo de la sala" onChangeText={(text) => prueba(text)} />
+
+                </View>
 
                 <View style={styles.margintopBotones}>
                     <Link to="/MpView" style={styles.LinkButton}>
@@ -29,6 +32,14 @@ export default function JoinRoom() {
                         <Text style={styles.LinkText}>Volver al Menu</Text>
                     </Link>
                 </View>
+
+                <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Image
+                        source={require('../Images/entrar.png')}
+                        style={styles.ImageIconStyle}
+                    />
+                </View>
+
             </View>
 
         </ScrollView>
@@ -38,8 +49,10 @@ export default function JoinRoom() {
 
 var styles = StyleSheet.create({
     centerText: {
-        textAlign: 'center'
-    },
+        textAlign: 'center',
+        fontSize: 35,
+        fontWeight: 'bold'
+      },
     margintopBotones: {
         marginTop: 10,
         alignItems: 'center',
@@ -58,5 +71,12 @@ var styles = StyleSheet.create({
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
+    },
+    ImageIconStyle: {
+        padding: 10,
+        marginTop: 80,
+        height: 250,
+        width: 250,
+        resizeMode: 'stretch',
     }
 });

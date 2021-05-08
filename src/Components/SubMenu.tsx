@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, Alert, Button } from 'react-native';
+import { View, Text, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, Alert, Button, Image } from 'react-native';
 import { Link } from 'react-router-native';
 import { ListPicker } from 'react-native-ultimate-modal-picker';
 import { startResponse } from '../Services/Services';
@@ -18,17 +18,30 @@ export default function subMenu() {
       <StatusBar />
       <View>
         <Text style={styles.centerText}>Bienvenido al menu de Reversi</Text>
-        <ListPicker title="Selecciona el nivel" items={items} onChange={(item) => chooseLvl(item)} />
+
+        <View style={{marginBottom:30}}>
+          <ListPicker title="Selecciona el nivel" items={items} onChange={(item) => chooseLvl(item)} />
+        </View>
+
         <View style={styles.margintopBotones}>
           <Link to="/GameViewAI" style={styles.LinkButton}>
             <Text style={styles.LinkText}>Jugar</Text>
           </Link>
         </View>
+
         <View style={styles.margintopBotones}>
           <Link to="/" style={styles.LinkButton}>
             <Text style={styles.LinkText}>Volver</Text>
           </Link>
         </View>
+
+        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              source={require('../Images/chip.png')}
+              style={styles.ImageIconStyle}
+            />
+        </View>
+
       </View>
     </SafeAreaView>
 
@@ -37,7 +50,10 @@ export default function subMenu() {
 
 var styles = StyleSheet.create({
   centerText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 35,
+    fontWeight: 'bold',
+    marginBottom: 40
   },
   margintopBotones: {
     marginTop: 10,
@@ -57,6 +73,13 @@ var styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     textTransform: "uppercase"
+  },
+  ImageIconStyle: {
+    padding: 10,
+    marginTop: 50,
+    height: 150,
+    width: 150,
+    resizeMode: 'stretch',
   }
 
 });

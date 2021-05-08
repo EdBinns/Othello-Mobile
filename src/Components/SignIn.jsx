@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase";
-import { View, Text, TextInput, Button, StatusBar, Alert } from 'react-native';
+import { auth2 } from "../../firebase";
+import { View, Text, TextInput, Button, StatusBar, Alert, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Link } from 'react-router-native';
 
-/*
-import * as GoogleAuthentication from 'expo-google-app-auth';
-import firebase from 'firebase';
-
-*/
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -16,59 +11,94 @@ const SignIn = () => {
 
   //Esta funcion es para comprobar la existencia de una cuenta en la BD de firebase.
   const signInWithEmailAndPasswordHandler = (email, password) => {
-    auth.signInWithEmailAndPassword(email, password).catch(error => {
-      Alert.alert("Advertencia","Usuario o contraseña invalidos")
+    auth2.signInWithEmailAndPassword(email, password).catch(error => {
+      Alert.alert("Advertencia", "Usuario o contraseña invalidos")
     });
   };
 
 
-  /*
-    const signInWithGoogle = () =>
-      GoogleAuthentication.logInAsync({
-        webClientId="349581276888-sit3tiuali8dnboomm6cqlcalem9h039.apps.googleusercontent.com",
-        offlineAccess: true
-      })
-        .then((logInResult) => {
-          if (logInResult.type === 'success') {
-            const { idToken, accessToken } = logInResult;
-            const credential = firebase.auth.GoogleAuthProvider.credential(
-              idToken,
-              accessToken
-            );
-  
-            return firebase.auth().signInWithCredential(credential);
-            // Successful sign in is handled by firebase.auth().onAuthStateChanged
-          }
-          return Promise.reject(); // Or handle user cancelation separatedly
-        })
-        .catch((error) => {
-          // ...
-        });
-  */
-  const prueba = () =>{
-    alert(email + password);
-  }
 
   return (
     <View>
-      <StatusBar/>
-      <Text h1>BIENVENIDOS AL SISTEMA</Text>
-      <TextInput value={email} onChangeText={email => setEmail(email)} placeholder="Ingrese su correo"></TextInput>
-      <TextInput value={password} onChangeText={password => setPassword(password)} placeholder="Ingrese su contraseña" ></TextInput>
+      <StatusBar />
+      <Text style={styles.centerText}>BIENVENIDOS AL LOGIN SISTEMA</Text>
 
-      <Button title="Iniciar Sesion" onPress={()=>{signInWithEmailAndPasswordHandler(email, password)}}/>
 
-      <Button title="Google" onPress = {prueba}/>
+      <View style={styles.viewInput}>
+        <TextInput style={styles.textInput} value={email} onChangeText={email => setEmail(email)} placeholder="Ingrese su correo"></TextInput>
+      </View>
 
-      <Link to="/" >
-        <Text>Registrarme</Text>
-      </Link>
+      <View style={styles.viewInput}>
+        <TextInput style={styles.textInput} value={password} onChangeText={password => setPassword(password)} placeholder="Ingrese su contraseña" ></TextInput>
+      </View>
+
+      <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <TouchableOpacity style={[styles.LinkButton, { marginTop: 20 }]} onPress={() => { signInWithEmailAndPasswordHandler(email, password) }}>
+          <Text style={styles.LinkText}>Iniciar Sesion</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Link style={[styles.LinkButton, { marginTop: 20 }]} to="/register" >
+          <Text style={styles.LinkText}>Registrarme</Text>
+        </Link>
+      </View>
+
+      <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Image
+          source={require('../Images/login.png')}
+          style={styles.ImageIconStyle}
+        />
+      </View>
 
     </View>
   );
-  }
+}
 
-  export default SignIn;
+var styles = StyleSheet.create({
+  centerText: {
+    textAlign: 'center',
+    fontSize: 35,
+    fontWeight: 'bold'
+  },
+  LinkButton: {
+    width: '60%',
+    elevation: 8,
+    backgroundColor: "#009688",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 10
+  },
+  LinkText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase"
+  },
+  ImageIconStyle: {
+    padding: 10,
+    marginTop: 50,
+    height: 200,
+    width: 200,
+    resizeMode: 'stretch',
+  },
+  viewInput: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  textInput: {
+    borderColor: 'black',
+    borderBottomWidth: 1,
+    width: '70%',
+    textAlign: 'center'
+  }
+});
+
+export default SignIn;
 
 
 

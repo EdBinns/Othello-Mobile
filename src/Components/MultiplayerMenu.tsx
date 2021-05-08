@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-native';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image } from 'react-native';
 
 
 export default function MultiplayerMenu() {
     return (
         <ScrollView>
             <View>
-                <Text>Reversi Multijugador</Text>
+                <Text style={styles.title}>Reversi Multijugador</Text>
 
                 <View style={styles.margintopBotones}>
                     <Link to="/ProgressBar" style={styles.LinkButton} >
@@ -27,6 +27,13 @@ export default function MultiplayerMenu() {
                     </Link>
                 </View>
 
+                <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Image
+                        source={require('../Images/mp.png')}
+                        style={styles.ImageIconStyle}
+                    />
+                </View>
+
             </View>
         </ScrollView>
     )
@@ -41,7 +48,7 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
     LinkButton: {
-        width:'60%',
+        width: '60%',
         elevation: 8,
         backgroundColor: "#009688",
         borderRadius: 10,
@@ -54,5 +61,18 @@ var styles = StyleSheet.create({
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
+    },
+    title: {
+        textAlign: 'center',
+        fontSize: 35,
+        fontWeight: 'bold',
+        marginBottom: 50
+    },
+    ImageIconStyle: {
+        padding: 10,
+        marginTop: 80,
+        height: 250,
+        width: 250,
+        resizeMode: 'stretch',
     }
 });

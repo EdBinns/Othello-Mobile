@@ -9,7 +9,8 @@ const BaseURL = 'https://backendreversi.azurewebsites.net/';
 export let startResponse: BoardResponse;
 export let gameStateBack: BoardResponse;
 export let gameId: string;
-export let createdMatch: boolean;
+export let createdMatch: number;
+export let members: string;
 
 
 
@@ -86,7 +87,7 @@ export async function makeMoveAI(actualBoard: ReversiBoard, level: number) {
 //Multijugador
 
 export async function CreateRoom(user:any) {
-  createdMatch = true;
+  createdMatch = 1;
   await Axius.post(BaseURL + 'createRandomGame',
     {
       board: startResponse.newBoard,
@@ -98,7 +99,6 @@ export async function CreateRoom(user:any) {
 }
 
 export async function JoinRoomService(user:any, idRoom: string) {
-  createdMatch = false;
   gameId = idRoom;
   await Axius.post(BaseURL + 'getGame',
     {
@@ -106,7 +106,8 @@ export async function JoinRoomService(user:any, idRoom: string) {
       user: user
     }
   ).then((res) => {
-    gameStateBack = res.data;
+    gameStateBack = res.data.json1;
+    createdMatch = res.data.createdMatch;
   })
 }
 
@@ -116,7 +117,8 @@ export async function GetActualGameService(idRoom: string) {
       id: idRoom
     }
   ).then((res) => {
-    gameStateBack = res.data;
+    gameStateBack = res.data.gameState;
+    members = res.data.members
   })
 }
 

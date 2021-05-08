@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image } from 'react-native';
 import { Link } from 'react-router-native';
 import * as Progress from 'react-native-progress';
 import { CreateRoom } from '../Services/Services';
@@ -13,12 +13,19 @@ export default function ProgressBar() {
 
     return (
         <ScrollView>
-            <Progress.Bar progress={1} width={250} />
+            <Text style={styles.centerText}>Partida Creada</Text>
 
-            <View>
+            <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Link to="/MpView" style={styles.LinkButton}>
                     <Text style={styles.LinkText}>Vamos a jugar</Text>
                 </Link>
+            </View>
+
+            <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Image
+                    source={require('../Images/palanca.png')}
+                    style={styles.ImageIconStyle}
+                />
             </View>
         </ScrollView>
     )
@@ -26,7 +33,10 @@ export default function ProgressBar() {
 
 var styles = StyleSheet.create({
     centerText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 35,
+        fontWeight: 'bold',
+        marginBottom: 50
     },
     margintopBotones: {
         marginTop: 10,
@@ -46,6 +56,13 @@ var styles = StyleSheet.create({
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
-    }
+    },
+    ImageIconStyle: {
+        padding: 10,
+        marginTop: 120,
+        height: 250,
+        width: 250,
+        resizeMode: 'stretch',
+      }
 
 });

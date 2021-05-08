@@ -1,8 +1,8 @@
 import GameContainer from './GameContainer';
 import React from 'react';
-import { startResponse, gameStateBack, gameId, makeMoveMultiplayer, GetActualGameService, createdMatch } from '../Services/Services';
+import { startResponse, gameStateBack, gameId, makeMoveMultiplayer, GetActualGameService, createdMatch, members } from '../Services/Services';
 import { Coordinate, ReversiBoard, ReversiCell, ScoresJson } from '../Models';
-import { ScrollView, View, Text, Button, Clipboard, TouchableOpacity } from 'react-native'
+import { ScrollView, View, Text, Button, Clipboard, TouchableOpacity, Alert, Image, StyleSheet } from 'react-native'
 
 
 export default function MpView() {
@@ -36,7 +36,7 @@ export default function MpView() {
 
 
     const showCordenade = async (coord: Coordinate, actualBoard: ReversiBoard) => {
-        if ((turn === 0 && !createdMatch) || (turn === 1 && createdMatch)) {
+        if ((turn === 0 && createdMatch === 0) || (turn === 1 && createdMatch === 1)) {
             let playerturn = turn
             await makeMoveMultiplayer(gameId, coord, actualBoard, playerturn)
 
@@ -72,6 +72,10 @@ export default function MpView() {
         Clipboard.setString(code)
     }
 
+    const showObservers = () => {
+        Alert.alert("Observadores del grupo", members)
+    }
+
     return (
         <ScrollView>
             <View>
@@ -82,9 +86,18 @@ export default function MpView() {
                     </TouchableOpacity>
                 </View>
 
+                <View style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={()=>showObservers()}>
+                            <Image
+                                source={require('../Images/grupo.png')}
+                                style={styles.ImageIconStyle}
+                            />
+                        </TouchableOpacity>
+                </View>
+
                 <GameContainer gameState={gameState} turn={turn} message={message} scores={scores} onClickCell={showCordenade} />
 
-                <View style={{marginTop: 10,alignItems: 'center',}}>
+                <View style={{ marginTop: 10, alignItems: 'center', }}>
                     <View style={{ width: '60%', elevation: 8, backgroundColor: "#114652", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 12 }}>
                         <Text style={{ fontSize: 18, color: "white", fontWeight: "bold", alignSelf: "center", textTransform: "uppercase" }} onPress={() => prueba()}>Actualizar</Text>
                     </View>
@@ -93,3 +106,15 @@ export default function MpView() {
         </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    ImageIconStyle: {
+        padding: 10,
+        margin: 5,
+        height: 25,
+        width: 25,
+        resizeMode: 'stretch',
+
+    }
+
+});

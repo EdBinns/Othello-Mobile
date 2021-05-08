@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Button, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Button, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, Alert, Image } from 'react-native';
 import { auth } from "../../firebase";
 import { Link } from 'react-router-native';
-import {startMatch} from '../Services/Services';
+import { startMatch } from '../Services/Services';
 
 
 export default function Menu() {
@@ -36,6 +36,13 @@ export default function Menu() {
             <Text style={styles.LinkText}>Cerrar sesion</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              source={require('../Images/reversi.png')}
+              style={styles.ImageIconStyle}
+            />
+        </View>
       </View>
     </SafeAreaView>
 
@@ -44,14 +51,16 @@ export default function Menu() {
 
 var styles = StyleSheet.create({
   centerText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 35,
+    fontWeight: 'bold'
   },
   margintopBotones: {
     marginTop: 10,
     alignItems: 'center',
   },
   LinkButton: {
-    width:'60%',
+    width: '60%',
     elevation: 8,
     backgroundColor: "#009688",
     borderRadius: 10,
@@ -65,6 +74,15 @@ var styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     textTransform: "uppercase"
+  },
+  ImageIconStyle: {
+    padding: 10,
+    marginTop: 50,
+    height: 200,
+    width: 200,
+    resizeMode: 'stretch',
+    borderWidth:2,
+    borderColor:'black'
   }
 
 });
