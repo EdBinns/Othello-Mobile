@@ -16,7 +16,7 @@ const GameView = () => {
     const [turn, setTurn] = React.useState<ReversiCell>(ReversiCell.White);
     const [message, setMessage] = React.useState<string>("");
     const [scores, setScores] = React.useState<ScoresJson>({ whiteScore: 0, blackScore: 0 });
-
+    
     const showCordenade = async (coord: Coordinate, actualBoard: ReversiBoard) => {
         let playerturn = turn
         await makeMove(coord, actualBoard, playerturn)

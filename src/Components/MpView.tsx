@@ -10,6 +10,8 @@ export default function MpView() {
     const [turn, setTurn] = React.useState<ReversiCell>(ReversiCell.White);
     const [message, setMessage] = React.useState<string>("");
     const [scores, setScores] = React.useState<ScoresJson>({ whiteScore: 0, blackScore: 0 });
+    const [inGame, setInGame] = React.useState(false);
+
 
     var code = gameId;
     var text = "nombre sala:" + " " + code;
@@ -76,6 +78,19 @@ export default function MpView() {
         Alert.alert("Observadores del grupo", members)
     }
 
+
+    const myFuntion = () => {
+        setTimeout(function () {
+            prueba();
+            myFuntion();
+        }, 3000)
+    }
+
+    if (!inGame) {
+        setInGame(true);
+        myFuntion();
+    }
+
     return (
         <ScrollView>
             <View>
@@ -86,13 +101,13 @@ export default function MpView() {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
-                        <TouchableOpacity style={{ alignItems: 'center'}} onPress={()=>showObservers()}>
-                            <Image
-                                source={require('../Images/grupo.png')}
-                                style={styles.ImageIconStyle}
-                            />
-                        </TouchableOpacity>
+                <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => showObservers()}>
+                        <Image
+                            source={require('../Images/grupo.png')}
+                            style={styles.ImageIconStyle}
+                        />
+                    </TouchableOpacity>
                 </View>
 
                 <GameContainer gameState={gameState} turn={turn} message={message} scores={scores} onClickCell={showCordenade} />
