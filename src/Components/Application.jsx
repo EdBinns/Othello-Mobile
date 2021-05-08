@@ -16,13 +16,13 @@ import JoinRoom from "./JoinRoom";
 
 function Application() {
   const user = useContext(UserContext);
-  console.log("aplicacion");
   return (
     user ?
       <NativeRouter>
         <View style={{ backgroundColor: '#ededed', flex: 1 }}>
           <Switch>
             <Route exact path="/" component={Menu} />
+            <Route exact path="/register" component={Menu} />
             <Route exact path="/SubMenu" component={SubMenu} />
             <Route exact path="/GameView" component={GameView} />
             <Route exact path="/GameViewAI" component={GameViewAI} />

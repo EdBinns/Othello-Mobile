@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth2 } from "../../firebase";
+import { auth } from "../../firebase";
 import { View, Text, TextInput, Button, StatusBar, Alert, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Link } from 'react-router-native';
 
@@ -11,7 +11,7 @@ const SignIn = () => {
 
   //Esta funcion es para comprobar la existencia de una cuenta en la BD de firebase.
   const signInWithEmailAndPasswordHandler = (email, password) => {
-    auth2.signInWithEmailAndPassword(email, password).catch(error => {
+    auth.signInWithEmailAndPassword(email, password).catch(error => {
       Alert.alert("Advertencia", "Usuario o contraseña invalidos")
     });
   };
